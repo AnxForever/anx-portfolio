@@ -35,6 +35,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: "chinese-ai-detector",
+    hfModel: "AnxForever/chinese-ai-detector-bert",
     title: "中文 AI 生成文本检测",
     link: "https://huggingface.co/AnxForever/chinese-ai-detector-bert",
     skills: ["Python", "BERT", "PyTorch", "Hugging Face"],

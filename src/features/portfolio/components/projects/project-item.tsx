@@ -1,6 +1,12 @@
 import { formatCompactNumber, formatNumber } from "@/utils/format"
 import { addQueryParams } from "@/utils/url"
-import { BoxIcon, InfinityIcon, LinkIcon, StarIcon } from "lucide-react"
+import {
+  BoxIcon,
+  DownloadIcon,
+  InfinityIcon,
+  LinkIcon,
+  StarIcon,
+} from "lucide-react"
 
 import { UTM_PARAMS } from "@/config/site"
 import {
@@ -27,17 +33,22 @@ export function ProjectItem({
   className,
   project,
   stargazersCount,
+  hfDownloads,
 }: {
   className?: string
   project: Project
   /** Star count for `project.repo`; null hides the badge. */
   stargazersCount?: number | null
+  /** Download count for `project.hfModel`; null hides the badge. */
+  hfDownloads?: number | null
 }) {
-  const { period, repo } = project
+  const { period, repo, hfModel } = project
   const isOngoing = !period?.end
   const isSinglePeriod = period?.end === period?.start
   const showStars =
     repo && typeof stargazersCount === "number" && stargazersCount > 0
+  const showHfDownloads =
+    hfModel && typeof hfDownloads === "number" && hfDownloads > 0
 
   return (
     <Collapsible className={className} defaultOpen={project.isExpanded}>
@@ -110,7 +121,7 @@ export function ProjectItem({
                   >
                     <StarIcon className="size-3.5" />
                     <span className="tabular-nums">
-                      {formatCompactNumber(stargazersCount)}
+                      {formatCompactNumber(stargazersCount).toLowerCase()}
                     </span>
                     <span className="sr-only">GitHub stars</span>
                   </a>
@@ -118,6 +129,34 @@ export function ProjectItem({
               />
               <TooltipContent className="tabular-nums">
                 {formatNumber(stargazersCount)} stars on GitHub
+              </TooltipContent>
+            </Tooltip>
+          )}
+
+          {showHfDownloads && (
+            <Tooltip>
+              <TooltipTrigger
+                render={
+                  <a
+                    className="relative flex shrink-0 items-center gap-1 text-sm text-muted-foreground after:absolute after:-inset-1.5 hover:text-foreground"
+                    href={addQueryParams(
+                      `https://huggingface.co/${hfModel}`,
+                      UTM_PARAMS
+                    )}
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    <DownloadIcon className="size-3.5" />
+                    <span className="tabular-nums">
+                      {formatCompactNumber(hfDownloads).toLowerCase()}
+                    </span>
+                    <span className="sr-only">Hugging Face downloads</span>
+                  </a>
+                }
+              />
+              <TooltipContent className="tabular-nums">
+                {formatNumber(hfDownloads)} downloads on Hugging Face (last 30
+                days)
               </TooltipContent>
             </Tooltip>
           )}

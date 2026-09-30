@@ -24,6 +24,11 @@ export type Project = {
    * render time and shown on the row; omit for projects without a public repo.
    */
   repo?: string
+  /**
+   * Hugging Face model id (`owner/name`). Its download count is fetched at
+   * render time and shown on the row; omit when the project has no model.
+   */
+  hfModel?: string
   /** Tags/technologies for chips or filtering. */
   skills: string[]
   /** Optional rich description; Markdown and line breaks supported. */
