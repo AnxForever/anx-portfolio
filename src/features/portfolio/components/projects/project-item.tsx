@@ -71,8 +71,8 @@ export function ProjectItem({
 
         <IconTile className="mx-4">{project.icon ?? <BoxIcon />}</IconTile>
 
-        <div className="flex flex-1 items-center gap-2 border-l border-dashed border-line p-4">
-          <div className="flex-1">
+        <div className="flex min-w-0 flex-1 items-center gap-2 border-l border-dashed border-line p-4">
+          <div className="min-w-0 flex-1">
             <h3 className="mb-1 leading-snug font-medium text-balance">
               <CollapsibleTrigger className="text-left">
                 <span className="absolute inset-0" aria-hidden />
@@ -82,6 +82,12 @@ export function ProjectItem({
                 />
               </CollapsibleTrigger>
             </h3>
+
+            {project.summary && (
+              <p className="text-sm/relaxed text-pretty text-muted-foreground">
+                {project.summary}
+              </p>
+            )}
 
             {period && (
               <dl className="text-sm text-muted-foreground">
