@@ -5,16 +5,15 @@ export const PROJECTS: Project[] = [
     id: "stylekit",
     repo: "AnxForever/stylekit",
     title: "StyleKit",
-    summary: "给 AI 编码助手用的网页风格库，网站和工具包已公开。",
+    summary:
+      "整理网页风格、设计参数、组件示例和模板，并提供 MCP、CLI 与 Skill。",
     link: "https://stylekit.top",
     skills: ["TypeScript", "Next.js", "React", "MCP", "Node.js"],
     isExpanded: true,
     titleEffect: "shimmer",
-    description: `StyleKit 把网页风格做成可预览的页面，并整理了配色、字体和组件示例。可以先在网站上选风格，再把这些信息交给 AI 编码助手。
+    description: `StyleKit 整理网页风格，以及配套的设计参数、组件示例、动画和页面模板。可以在网站上浏览，也可以用 MCP、CLI 或 Skill，把公开资料带进开发流程。MCP 能查找风格、生成实现 brief、按许可读取资产，并对代码做静态风格检查。
 
-我在维护网站和配套的 MCP、命令行工具，让编辑器里的助手也能查风格、取设计参数和组件示例。MCP 还提供了基于类名规则的代码检查。
-
-[打开网站](https://stylekit.top) · [查看源码](https://github.com/AnxForever/stylekit)`,
+[工具怎么用和更新](https://me.anxforever.cn/blog/stylekit-mcp-tools) · [打开网站](https://stylekit.top) · [查看源码](https://github.com/AnxForever/stylekit)`,
   },
   {
     id: "research-first",

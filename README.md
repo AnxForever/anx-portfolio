@@ -38,16 +38,16 @@ pnpm format:write   # Prettier
 
 ## 页面
 
-| 地址 | 内容 |
-| --- | --- |
-| `/` | 个人介绍、GitHub 贡献热力图、About、Blog、Education、Projects |
-| `/blog` | 文章列表（含搜索） |
-| `/blog/<slug>` | 文章正文 |
-| `/bookmarks` | 收藏，按分类筛选 |
-| `/craft` | 作品展示 |
-| `/timeline` | 时间线 |
-| `/testimonials` | 评价 |
-| `/sponsors` | 赞助 |
+| 地址            | 内容                                                          |
+| --------------- | ------------------------------------------------------------- |
+| `/`             | 个人介绍、GitHub 贡献热力图、About、Blog、Education、Projects |
+| `/blog`         | 文章列表（含搜索）                                            |
+| `/blog/<slug>`  | 文章正文                                                      |
+| `/bookmarks`    | 收藏，按分类筛选                                              |
+| `/craft`        | 作品展示                                                      |
+| `/timeline`     | 时间线                                                        |
+| `/testimonials` | 评价                                                          |
+| `/sponsors`     | 赞助                                                          |
 
 AI 与爬虫可读的纯文本入口：`/llms.txt`、`/index.md`，以及每篇文章和每个栏目的 `.md` 版本（如 `/blog/a-place-of-my-own.md`）。发 `Accept: text/markdown` 请求网页地址也会返回 markdown。
 
@@ -55,21 +55,21 @@ AI 与爬虫可读的纯文本入口：`/llms.txt`、`/index.md`，以及每篇�
 
 内容和页面组件分开，改内容不用动组件。
 
-| 内容 | 位置 |
-| --- | --- |
-| 个人信息（名字、简介、头像、位置、时区） | `src/features/portfolio/data/user.ts` |
-| 社交账号 | `src/features/portfolio/data/social-links.ts` |
-| 站点配置（域名、导航、许可） | `src/config/site.ts` |
-| 项目 | `src/features/portfolio/data/projects.tsx` |
-| 经历 / 教育 / 技能栈 | `src/features/portfolio/data/{experiences,education,tech-stack}.tsx` |
-| 奖项、认证、知识产权 | `src/features/portfolio/data/{awards,certifications,intellectual-property}.ts` |
-| 时间线 | `src/features/portfolio/data/timeline.ts` |
-| 评价 | `src/features/portfolio/data/testimonials.tsx` |
-| 赞助商 | `src/features/sponsor/data.tsx` |
-| 收藏 | `src/features/bookmark/data.tsx` |
-| 作品 | `src/features/craft/data.ts` |
-| 文章 | `src/features/doc/content/blog/*.mdx` |
-| 头像与图标 | `public/images/`、`public/*` |
+| 内容                                     | 位置                                                                           |
+| ---------------------------------------- | ------------------------------------------------------------------------------ |
+| 个人信息（名字、简介、头像、位置、时区） | `src/features/portfolio/data/user.ts`                                          |
+| 社交账号                                 | `src/features/portfolio/data/social-links.ts`                                  |
+| 站点配置（域名、导航、许可）             | `src/config/site.ts`                                                           |
+| 项目                                     | `src/features/portfolio/data/projects.tsx`                                     |
+| 经历 / 教育 / 技能栈                     | `src/features/portfolio/data/{experiences,education,tech-stack}.tsx`           |
+| 奖项、认证、知识产权                     | `src/features/portfolio/data/{awards,certifications,intellectual-property}.ts` |
+| 时间线                                   | `src/features/portfolio/data/timeline.ts`                                      |
+| 评价                                     | `src/features/portfolio/data/testimonials.tsx`                                 |
+| 赞助商                                   | `src/features/sponsor/data.tsx`                                                |
+| 收藏                                     | `src/features/bookmark/data.tsx`                                               |
+| 作品                                     | `src/features/craft/data.ts`                                                   |
+| 文章                                     | `src/features/doc/content/blog/*.mdx`                                          |
+| 头像与图标                               | `public/images/`、`public/*`                                                   |
 
 几个约定：
 
@@ -81,15 +81,15 @@ AI 与爬虫可读的纯文本入口：`/llms.txt`、`/index.md`，以及每篇�
 
 全部可选，不配也能跑；只有需要对应功能时才填。详见 `.env.example`。
 
-| 变量 | 作用 |
-| --- | --- |
-| `NEXT_PUBLIC_APP_URL` | 站点绝对地址，影响 JSON-LD、sitemap、OG 图 |
+| 变量                                       | 作用                                                                                                      |
+| ------------------------------------------ | --------------------------------------------------------------------------------------------------------- |
+| `NEXT_PUBLIC_APP_URL`                      | 站点绝对地址，影响 JSON-LD、sitemap、OG 图                                                                |
 | `NEXT_PUBLIC_GITHUB_CONTRIBUTIONS_API_URL` | 首页贡献热力图的接口，默认用公开的 [jogruber API](https://github.com/grubersjoe/github-contributions-api) |
-| `GITHUB_API_TOKEN` | 头部仓库 star 数。不填走匿名请求（有限流），也能用 |
-| `OPENPANEL_*` | OpenPanel 分析 |
-| `NEXT_PUBLIC_GTM_ID` | Google Tag Manager |
-| `DISCORD_FEEDBACK_WEBHOOK_URL` | 文档页「这篇有用吗」的回调；不填则打到本地控制台 |
-| `NEXT_PUBLIC_CARBON_ADS_*` | Carbon 广告；两个都留空则完全不渲染广告位 |
+| `GITHUB_API_TOKEN`                         | 头部仓库 star 数。不填走匿名请求（有限流），也能用                                                        |
+| `OPENPANEL_*`                              | OpenPanel 分析                                                                                            |
+| `NEXT_PUBLIC_GTM_ID`                       | Google Tag Manager                                                                                        |
+| `DISCORD_FEEDBACK_WEBHOOK_URL`             | 文档页「这篇有用吗」的回调；不填则打到本地控制台                                                          |
+| `NEXT_PUBLIC_CARBON_ADS_*`                 | Carbon 广告；两个都留空则完全不渲染广告位                                                                 |
 
 ## 来源与许可
 
