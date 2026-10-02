@@ -1,4 +1,5 @@
-import { Caveat, IBM_Plex_Serif } from "next/font/google"
+import { IBM_Plex_Serif } from "next/font/google"
+import localFont from "next/font/local"
 import { GeistMono } from "geist/font/mono"
 import { GeistSans } from "geist/font/sans"
 
@@ -13,8 +14,12 @@ const fontSerif = IBM_Plex_Serif({
   variable: "--font-serif",
 })
 
-const fontHandwritten = Caveat({
-  weight: ["400", "500"],
+// Keep Caveat local to avoid the cloud build's Google-font resolution failure.
+// Source: googlefonts/caveat@59745e818ef7973e11e70cb1358d0e902b56c5fc; see Caveat-OFL.txt.
+const fontHandwritten = localFont({
+  src: "../assets/fonts/Caveat-Variable.ttf",
+  weight: "400 700",
+  style: "normal",
   display: "swap",
   variable: "--font-handwritten",
 })
