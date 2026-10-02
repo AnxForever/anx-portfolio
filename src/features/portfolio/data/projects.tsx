@@ -17,6 +17,21 @@ export const PROJECTS: Project[] = [
 [打开网站](https://stylekit.top) · [查看源码](https://github.com/AnxForever/stylekit)`,
   },
   {
+    id: "research-first",
+    repo: "AnxForever/research-first",
+    title: "Research First",
+    summary: "给 AI 编码助手用的调研 Skill，先查资料、比较方案，再动手。",
+    link: "https://github.com/AnxForever/research-first",
+    skills: ["Agent Skill", "Markdown"],
+    description: `我给 AI 编码助手写的一套「先调研，再动手」的工作步骤。做功能前，要求它先看项目已有的代码，再查相关产品、开源方案和官方资料，把能复用什么、为什么这样选说清楚。
+
+仓库里有 Skill、调研模板和使用示例，还记录了一次在 shadcn-admin 独立副本上补 CSV 导出的过程：查了哪些方案、怎么选、改了什么，以及最后怎么检查。
+
+安装：\`npx skills add AnxForever/research-first\`
+
+[安装与用法](https://github.com/AnxForever/research-first#快速开始) · [查看案例](https://github.com/AnxForever/research-first/blob/main/evals/README.md)`,
+  },
+  {
     id: "chinese-ai-detector",
     hfModel: "AnxForever/chinese-ai-detector-bert",
     title: "中文 AI 文本检测",
