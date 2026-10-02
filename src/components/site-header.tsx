@@ -12,6 +12,7 @@ import { sortBookmarksNewestFirst } from "@/features/bookmark/lib/sort"
 import type { BookmarkPreview } from "@/features/bookmark/types"
 import { getAllDocs } from "@/features/doc/data/documents"
 import type { DocPreview } from "@/features/doc/types/document"
+import { getPortfolioSections } from "@/features/portfolio/data/sections"
 
 const BrandContextMenu = dynamic(
   () => import("@/components/brand-context-menu")
@@ -57,6 +58,7 @@ export function SiteHeader() {
           <CommandMenu
             docs={docPreviews}
             bookmarks={bookmarkPreviews}
+            portfolioSections={getPortfolioSections()}
             enabledHotkeys
           />
           <Separator

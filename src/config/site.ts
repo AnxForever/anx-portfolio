@@ -1,8 +1,7 @@
-import type { Route } from "next"
-
-import type { NavItem } from "@/types/nav"
 import { SOCIAL } from "@/features/portfolio/data/social-links"
 import { USER } from "@/features/portfolio/data/user"
+
+export { MAIN_NAV, MOBILE_NAV } from "./navigation"
 
 /**
  * The published origin, without protocol. Single place to change when the
@@ -31,29 +30,6 @@ export const META_THEME_COLORS = {
   light: "#ffffff",
   dark: "#09090b",
 }
-
-export const MAIN_NAV: NavItem<Route>[] = [
-  {
-    title: "Blog",
-    href: "/blog",
-  },
-  {
-    title: "Now",
-    href: "/now",
-  },
-  {
-    title: "Bookmarks",
-    href: "/bookmarks",
-  },
-]
-
-export const MOBILE_NAV: NavItem<Route>[] = [
-  {
-    title: "Home",
-    href: "/",
-  },
-  ...MAIN_NAV,
-]
 
 /**
  * No X account yet. The `twitter.site` / `twitter.creator` metadata fields are

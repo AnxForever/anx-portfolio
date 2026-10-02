@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next"
 
+import { MOBILE_NAV } from "@/config/navigation"
 import { SITE_INFO } from "@/config/site"
 import { getBlogPosts } from "@/features/doc/data/documents"
 
@@ -12,17 +13,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: new Date(post.metadata.updatedAt).toISOString(),
   }))
 
-  const routes = [
-    "",
-    "/blog",
-    "/now",
-    "/craft",
-    "/bookmarks",
-    "/insights",
-    "/sponsors",
-    "/testimonials",
-  ].map((route) => ({
-    url: `${SITE_INFO.url}${route}`,
+  const routes = MOBILE_NAV.map(({ href }) => ({
+    url: `${SITE_INFO.url}${href === "/" ? "" : href}`,
     lastModified: new Date().toISOString(),
   }))
 

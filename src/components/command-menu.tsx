@@ -3,23 +3,20 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react"
 import { copyToClipboardWithEvent } from "@/utils/copy"
 import { useRouter } from "@bprogress/next/app"
-import { PenTool03Icon } from "@hugeicons/core-free-icons"
-import { HugeiconsIcon } from "@hugeicons/react"
 import { useTiks } from "@rexa-developer/tiks/react"
 import {
   AwardIcon,
   BookmarkIcon,
   BoxIcon,
   BriefcaseBusinessIcon,
+  ClockIcon,
   CornerDownLeftIcon,
   DownloadIcon,
   FileTextIcon,
   GraduationCapIcon,
   LayersIcon,
-  LineChartIcon,
   MonitorIcon,
   MoonStarIcon,
-  QuoteIcon,
   RssIcon,
   SunMediumIcon,
   TextInitialIcon,
@@ -28,6 +25,7 @@ import {
 import { useTheme } from "next-themes"
 import { useHotkeys } from "react-hotkeys-hook"
 
+import { MOBILE_NAV } from "@/config/navigation"
 import { trackEvent } from "@/lib/events"
 import { useClickSound } from "@/hooks/soundcn/use-click-sound"
 import { useMutationObserver } from "@/hooks/use-mutation-observer"
@@ -47,16 +45,11 @@ import type { BookmarkPreview } from "@/features/bookmark/types"
 import type { DocPreview } from "@/features/doc/types/document"
 import { SOCIAL_ICONS } from "@/features/portfolio/components/social-link-icons"
 import { SOCIAL_LINKS } from "@/features/portfolio/data/social-links"
+import type { PortfolioSection } from "@/features/portfolio/types/sections"
 
 import { AnxMark, getMarkSVG } from "./anx-mark"
 import { getWordmarkSVG } from "./anx-wordmark"
-import {
-  FavouriteIcon,
-  GridViewIcon,
-  NewsIcon,
-  ReactIcon,
-  SearchIcon,
-} from "./icons"
+import { NewsIcon, SearchIcon } from "./icons"
 import { Button } from "./ui/button"
 import { Kbd, KbdGroup } from "./ui/kbd"
 
@@ -73,96 +66,27 @@ type CommandLinkItem = {
   openInNewTab?: boolean
 }
 
-const MENU_LINKS: CommandLinkItem[] = [
-  {
-    title: "Home",
-    href: "/",
-    kind: "page",
-    icon: <AnxMark />,
-    shortcut: "GH",
-  },
-  {
-    title: "Craft",
-    href: "/craft",
-    kind: "page",
-    icon: <HugeiconsIcon icon={PenTool03Icon} aria-hidden />,
-    shortcut: "GR",
-  },
-  {
-    title: "Blog",
-    href: "/blog",
-    kind: "page",
-    icon: <NewsIcon />,
-    shortcut: "GL",
-  },
-  {
-    title: "Sponsors",
-    href: "/sponsors",
-    kind: "page",
-    icon: <FavouriteIcon />,
-    shortcut: "GS",
-  },
-  {
-    title: "Bookmarks",
-    href: "/bookmarks",
-    kind: "page",
-    icon: <BookmarkIcon />,
-    shortcut: "GM",
-  },
-  {
-    title: "Insights",
-    href: "/insights",
-    kind: "page",
-    icon: <LineChartIcon />,
-    shortcut: "GI",
-  },
-  {
-    title: "Testimonials",
-    href: "/testimonials",
-    kind: "page",
-    icon: <QuoteIcon strokeWidth={1.5} />,
-    shortcut: "GT",
-  },
-]
+const MENU_ICONS: Record<string, React.ReactElement> = {
+  "/": <AnxMark />,
+  "/blog": <NewsIcon />,
+  "/now": <ClockIcon />,
+  "/bookmarks": <BookmarkIcon />,
+}
 
-const PORTFOLIO_LINKS: CommandLinkItem[] = [
-  {
-    title: "Hello",
-    href: "/#hello",
-    kind: "page",
-    icon: <TextInitialIcon />,
-  },
-  {
-    title: "Stack",
-    href: "/#stack",
-    kind: "page",
-    icon: <LayersIcon />,
-  },
-  {
-    title: "Experience",
-    href: "/#experience",
-    kind: "page",
-    icon: <BriefcaseBusinessIcon />,
-  },
-  {
-    title: "Education",
-    href: "/#education",
-    kind: "page",
-    icon: <GraduationCapIcon />,
-  },
-  {
-    title: "Projects",
-    href: "/#projects",
-    kind: "page",
-    icon: <BoxIcon />,
-  },
-  {
-    title: "Recognition",
-    href: "/#recognition",
-    kind: "page",
-    icon: <AwardIcon />,
-  },
-]
+const MENU_LINKS: CommandLinkItem[] = MOBILE_NAV.map((link) => ({
+  ...link,
+  kind: "page",
+  icon: MENU_ICONS[link.href],
+}))
+
+const PORTFOLIO_ICONS: Record<PortfolioSection["id"], React.ReactElement> = {
+  hello: <TextInitialIcon />,
+  stack: <LayersIcon />,
+  experience: <BriefcaseBusinessIcon />,
+  education: <GraduationCapIcon />,
+  projects: <BoxIcon />,
+  recognition: <AwardIcon />,
+}
 
 const SOCIAL_LINK_ITEMS: CommandLinkItem[] = SOCIAL_LINKS.map((item) => ({
   title: item.title,
@@ -198,10 +122,12 @@ const OTHER_LINK_ITEMS: CommandLinkItem[] = [
 export function CommandMenu({
   docs,
   bookmarks,
+  portfolioSections,
   enabledHotkeys = false,
 }: {
   docs: DocPreview[]
   bookmarks: BookmarkPreview[]
+  portfolioSections: PortfolioSection[]
   enabledHotkeys?: boolean
 }) {
   const router = useRouter()
@@ -307,6 +233,17 @@ export function CommandMenu({
     [docs]
   )
 
+  const portfolioLinks = useMemo(
+    () =>
+      portfolioSections.map<CommandLinkItem>((section) => ({
+        title: section.title,
+        href: `/#${section.id}`,
+        kind: "page",
+        icon: PORTFOLIO_ICONS[section.id],
+      })),
+    [portfolioSections]
+  )
+
   const bookmarksGroup = useMemo(() => {
     if (!bookmarks || bookmarks.length === 0) {
       return null
@@ -378,7 +315,7 @@ export function CommandMenu({
 
             <CommandLinkGroup
               heading="Portfolio"
-              links={PORTFOLIO_LINKS}
+              links={portfolioLinks}
               onLinkHighlight={handleLinkHighlight}
               onLinkSelect={handleOpenLink}
             />
