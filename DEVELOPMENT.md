@@ -60,15 +60,15 @@ pnpm test:run
 
 ## 项目结构
 
-| 目录 | 用途 |
-| --- | --- |
-| `src/app/` | App Router 页面、布局、路由处理器 |
-| `src/components/` | 全站共用的 UI 组件 |
-| `src/features/` | 按功能划分的模块：`portfolio`、`doc`、`blog`、`bookmark`、`craft`、`sponsor` |
-| `src/registry/` | 从上游带来的组件库源码，站点 UI 的实际实现层（**不是**可发布的 registry，见下） |
-| `src/config/` | 站点配置（`site.ts`）、JSON-LD |
-| `src/hooks/`、`src/lib/`、`src/utils/` | hooks、库、工具函数 |
-| `src/styles/` | 全局 CSS 与排版样式 |
+| 目录                                   | 用途                                                                            |
+| -------------------------------------- | ------------------------------------------------------------------------------- |
+| `src/app/`                             | App Router 页面、布局、路由处理器                                               |
+| `src/components/`                      | 全站共用的 UI 组件                                                              |
+| `src/features/`                        | 按功能划分的模块：`portfolio`、`doc`、`blog`、`bookmark`、`craft`、`sponsor`    |
+| `src/registry/`                        | 从上游带来的组件库源码，站点 UI 的实际实现层（**不是**可发布的 registry，见下） |
+| `src/config/`                          | 站点配置（`site.ts`）、JSON-LD                                                  |
+| `src/hooks/`、`src/lib/`、`src/utils/` | hooks、库、工具函数                                                             |
+| `src/styles/`                          | 全局 CSS 与排版样式                                                             |
 
 关键文件：`components.json`（shadcn 配置）、`src/features/portfolio/data/`（个人信息与项目等内容）、`.env.example`（环境变量模板）。
 

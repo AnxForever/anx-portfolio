@@ -6,15 +6,15 @@ Next.js 16 (App Router) personal website: portfolio, blog, bookmarks, and a smal
 
 ## Project structure
 
-| Directory                              | Purpose                                                                      |
-| -------------------------------------- | ---------------------------------------------------------------------------- |
-| `src/app/`                             | App Router pages, layouts, route handlers                                     |
-| `src/components/`                      | Shared UI components                                                          |
-| `src/features/`                        | Feature modules: `portfolio`, `doc`, `blog`, `bookmark`, `craft`, `sponsor`   |
-| `src/registry/`                        | Component library inherited from upstream; the site's own UI is built on it   |
-| `src/config/`                          | Site (`site.ts`), JSON-LD                                                     |
-| `src/hooks/`, `src/lib/`, `src/utils/` | Hooks, libraries, utilities                                                   |
-| `src/styles/`                          | Global CSS and typography                                                     |
+| Directory                              | Purpose                                                                     |
+| -------------------------------------- | --------------------------------------------------------------------------- |
+| `src/app/`                             | App Router pages, layouts, route handlers                                   |
+| `src/components/`                      | Shared UI components                                                        |
+| `src/features/`                        | Feature modules: `portfolio`, `doc`, `blog`, `bookmark`, `craft`, `sponsor` |
+| `src/registry/`                        | Component library inherited from upstream; the site's own UI is built on it |
+| `src/config/`                          | Site (`site.ts`), JSON-LD                                                   |
+| `src/hooks/`, `src/lib/`, `src/utils/` | Hooks, libraries, utilities                                                 |
+| `src/styles/`                          | Global CSS and typography                                                   |
 
 **Key files**: `components.json` (shadcn config), `src/features/portfolio/data/` (profile, projects and other content), `src/config/site.ts` (`SITE_DOMAIN`, nav, license), `.env.example` (env vars)
 
