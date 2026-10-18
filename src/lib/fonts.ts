@@ -1,4 +1,9 @@
-import { IBM_Plex_Serif } from "next/font/google"
+import {
+  Archivo_Black,
+  IBM_Plex_Serif,
+  Instrument_Serif,
+  Space_Grotesk,
+} from "next/font/google"
 import localFont from "next/font/local"
 import { GeistMono } from "geist/font/mono"
 import { GeistSans } from "geist/font/sans"
@@ -12,6 +17,27 @@ const fontSerif = IBM_Plex_Serif({
   weight: ["400"],
   display: "swap",
   variable: "--font-serif",
+})
+
+const fontEditorial = Instrument_Serif({
+  weight: ["400"],
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-editorial",
+})
+
+const fontDisplay = Archivo_Black({
+  weight: ["400"],
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-display",
+})
+
+const fontTech = Space_Grotesk({
+  weight: ["400", "500", "700"],
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-tech",
 })
 
 // Keep Caveat local to avoid the cloud build's Google-font resolution failure.
@@ -31,6 +57,9 @@ export const fontVariables = cn(
   fontMono.variable,
   fontSerif.variable,
   fontHandwritten.variable,
+  fontEditorial.variable,
+  fontDisplay.variable,
+  fontTech.variable,
   "[--font-sans:var(--font-geist-sans)]",
   "[--font-mono:var(--font-geist-mono)]"
 )

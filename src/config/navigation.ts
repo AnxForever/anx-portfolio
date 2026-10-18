@@ -11,6 +11,7 @@ export const MAIN_NAV: SiteNavItem[] = [
   { title: "Blog", href: "/blog", shortcut: "GL" },
   { title: "Now", href: "/now", shortcut: "GN" },
   { title: "Bookmarks", href: "/bookmarks", shortcut: "GM" },
+  { title: "Templates", href: "/templates", shortcut: "GT" },
 ]
 
 export const MOBILE_NAV: SiteNavItem[] = [

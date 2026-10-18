@@ -1,0 +1,347 @@
+/* Preview-only styles. Each template owns its palette and motion language. */
+
+.tpl-preview {
+  position: relative;
+  min-height: 100svh;
+  isolation: isolate;
+  overflow: clip;
+}
+
+.tpl-frame {
+  width: min(100% - 2rem, 76rem);
+  margin-inline: auto;
+}
+
+.tpl-meta {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  line-height: 1;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.tpl-hairline {
+  border-color: color-mix(in oklab, currentColor 18%, transparent);
+}
+
+.tpl-preview a {
+  text-underline-offset: 0.25em;
+}
+
+/* Mechanical — paper drawing sheet, graphite and oxide red. */
+.tpl-mechanical {
+  --mech-paper: #f3f0e8;
+  --mech-ink: #1d1b17;
+  --mech-line: #224e74;
+  --mech-red: #a9482f;
+  background: var(--mech-paper);
+  color: var(--mech-ink);
+}
+.dark .tpl-mechanical {
+  --mech-paper: #10100f;
+  --mech-ink: #ece9e0;
+  --mech-line: #8db4d1;
+  --mech-red: #e07b5d;
+}
+.tpl-mechanical .tpl-sheet {
+  border-color: color-mix(in oklab, var(--mech-ink) 24%, transparent);
+}
+.tpl-mechanical .tpl-sheet-fill {
+  background: color-mix(in oklab, var(--mech-paper) 88%, #fff 12%);
+}
+.dark .tpl-mechanical .tpl-sheet-fill {
+  background: color-mix(in oklab, var(--mech-paper) 88%, #fff 4%);
+}
+
+/* Electrical — lab instrument, phosphor green, scanlines. */
+.tpl-electrical {
+  --el-bg: #06100c;
+  --el-fg: #d8ffe3;
+  --el-green: #8bffb0;
+  --el-cyan: #6ee7f9;
+  --el-dim: #6f8f7b;
+  background:
+    radial-gradient(circle at 18% 0%, #0d2a1e 0%, transparent 34rem),
+    var(--el-bg);
+  color: var(--el-fg);
+}
+
+.tpl-electrical {
+  font-family:
+    var(--font-tech), "Noto Sans SC", "Microsoft YaHei", var(--font-sans);
+}
+.tpl-civil .tpl-serif,
+.tpl-medicine .tpl-serif,
+.tpl-business .tpl-serif {
+  font-family:
+    "Songti SC", "STSong", "Noto Serif CJK SC", "Source Han Serif SC", "SimSun",
+    var(--font-editorial), serif;
+  font-weight: 400;
+  letter-spacing: -0.025em;
+}
+.tpl-design {
+  font-family:
+    var(--font-tech), "Noto Sans SC", "Microsoft YaHei", var(--font-sans);
+}
+.tpl-design .tpl-display {
+  font-family:
+    var(--font-display), "Noto Sans SC", "Microsoft YaHei", sans-serif;
+}
+.tpl-design .tpl-meta {
+  font-family: var(--font-mono);
+}
+.tpl-electrical .tpl-card {
+  border: 1px solid color-mix(in oklab, var(--el-green) 24%, transparent);
+  background: color-mix(in oklab, var(--el-bg) 82%, #fff 18%);
+}
+.tpl-electrical .tpl-grid {
+  background-image:
+    linear-gradient(
+      color-mix(in oklab, var(--el-green) 10%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      color-mix(in oklab, var(--el-green) 10%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: 40px 40px;
+}
+.tpl-electrical .tpl-scanlines::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0 3px,
+    color-mix(in oklab, #000 26%, transparent) 3px 4px
+  );
+  opacity: 0.28;
+}
+.tpl-wave {
+  stroke-dasharray: 520;
+  animation: tpl-wave 4.8s linear infinite;
+}
+.tpl-blink {
+  animation: tpl-blink 1.2s steps(1, end) infinite;
+}
+
+/* Civil / architecture — warm paper, blueprint blue, structural rules. */
+.tpl-civil {
+  --cv-bg: #f3eee3;
+  --cv-ink: #211f1a;
+  --cv-blue: #224e74;
+  --cv-clay: #ad6048;
+  background:
+    linear-gradient(
+      90deg,
+      color-mix(in oklab, var(--cv-blue) 8%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      color-mix(in oklab, var(--cv-blue) 8%, transparent) 1px,
+      transparent 1px
+    ),
+    var(--cv-bg);
+  background-size: 48px 48px;
+  color: var(--cv-ink);
+}
+.tpl-civil .tpl-card {
+  border: 1px solid color-mix(in oklab, var(--cv-ink) 22%, transparent);
+  background: color-mix(in oklab, var(--cv-bg) 88%, #fff 12%);
+}
+.tpl-load-line {
+  stroke-dasharray: 8 8;
+  animation: tpl-load 5s linear infinite;
+}
+
+/* Medicine — clinical paper, soft mint, ECG. */
+.tpl-medicine {
+  --md-bg: #f4f8f5;
+  --md-ink: #142b28;
+  --md-green: #0d4a41;
+  --md-red: #833033;
+  --md-mint: #dceee5;
+  background:
+    radial-gradient(circle at 100% 0%, #e4f1e9 0%, transparent 36rem),
+    var(--md-bg);
+  color: var(--md-ink);
+}
+.tpl-medicine .tpl-card {
+  border: 1px solid color-mix(in oklab, var(--md-green) 20%, transparent);
+  background: color-mix(in oklab, #fff 74%, var(--md-mint) 26%);
+}
+.tpl-ecg {
+  stroke-dasharray: 760;
+  animation: tpl-ecg 4.2s linear infinite;
+}
+.tpl-pulse {
+  animation: tpl-pulse 4.2s ease-in-out infinite;
+}
+
+/* Business — annual report, ivory, ink and brass. */
+.tpl-business {
+  --bz-bg: #f2ede3;
+  --bz-ink: #151412;
+  --bz-green: #143b2d;
+  --bz-brass: #a57e45;
+  --bz-red: #8a3030;
+  background:
+    linear-gradient(
+      90deg,
+      color-mix(in oklab, var(--bz-ink) 5%, transparent) 1px,
+      transparent 1px
+    ),
+    var(--bz-bg);
+  background-size: 25% 100%;
+  color: var(--bz-ink);
+}
+.tpl-business .tpl-card {
+  border: 1px solid color-mix(in oklab, var(--bz-ink) 20%, transparent);
+  background: color-mix(in oklab, #fff 54%, var(--bz-bg) 46%);
+}
+.tpl-chart-draw {
+  stroke-dasharray: 1200;
+  animation: tpl-chart 2.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.tpl-chart-dot {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: tpl-dot 2.8s ease-in-out infinite;
+}
+.tpl-scan-line {
+  animation: tpl-scan 4.8s cubic-bezier(0.45, 0, 0.2, 1) infinite;
+}
+.tpl-ecg-scan {
+  animation: tpl-ecg-scan 4.8s cubic-bezier(0.45, 0, 0.2, 1) infinite;
+}
+.tpl-hover-pause:hover .tpl-marquee {
+  animation-play-state: paused;
+}
+
+/* Design — risograph poster, oversized type, color blocks. */
+.tpl-design {
+  --ds-bg: #f1ede3;
+  --ds-ink: #111111;
+  --ds-blue: #2b4cff;
+  --ds-coral: #ff5b4c;
+  --ds-lime: #d9ff4a;
+  background: var(--ds-bg);
+  color: var(--ds-ink);
+}
+.tpl-design .tpl-display {
+  font-weight: 700;
+  letter-spacing: -0.075em;
+  line-height: 0.82;
+}
+.tpl-design .tpl-marquee {
+  animation: tpl-marquee 18s linear infinite;
+}
+.tpl-design .tpl-spin-slow {
+  animation: tpl-spin 16s linear infinite;
+}
+.tpl-design .tpl-sticker {
+  box-shadow: 4px 4px 0 var(--ds-ink);
+}
+
+@keyframes tpl-wave {
+  to {
+    stroke-dashoffset: -1040;
+  }
+}
+@keyframes tpl-blink {
+  50% {
+    opacity: 0;
+  }
+}
+@keyframes tpl-load {
+  to {
+    stroke-dashoffset: -32;
+  }
+}
+@keyframes tpl-ecg {
+  to {
+    stroke-dashoffset: -1520;
+  }
+}
+@keyframes tpl-pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+  12% {
+    opacity: 1;
+    transform: scale(1.35);
+  }
+  32% {
+    opacity: 0.45;
+    transform: scale(1);
+  }
+}
+@keyframes tpl-chart {
+  from {
+    stroke-dashoffset: 1200;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes tpl-dot {
+  0%,
+  100% {
+    r: 3;
+    opacity: 0.55;
+  }
+  50% {
+    r: 5.5;
+    opacity: 1;
+  }
+}
+@keyframes tpl-scan {
+  0% {
+    transform: translateX(-8px);
+    opacity: 0;
+  }
+  12%,
+  82% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateX(448px);
+    opacity: 0;
+  }
+}
+@keyframes tpl-ecg-scan {
+  0% {
+    transform: translateX(-4px);
+    opacity: 0;
+  }
+  15%,
+  80% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateX(316px);
+    opacity: 0;
+  }
+}
+@keyframes tpl-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes tpl-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tpl-preview *,
+  .tpl-preview *::before,
+  .tpl-preview *::after {
+    animation: none !important;
+  }
+}
