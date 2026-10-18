@@ -133,7 +133,7 @@ export function SiteFooterCad() {
               <ul className="flex flex-col gap-0.5">
                 <li>
                   <a
-                    className="link-underline"
+                    className="inline-flex min-h-6 items-center link-underline"
                     href="/llms.txt"
                     target="_blank"
                     rel="noopener"
@@ -143,7 +143,7 @@ export function SiteFooterCad() {
                 </li>
                 <li>
                   <a
-                    className="link-underline"
+                    className="inline-flex min-h-6 items-center link-underline"
                     href="/index.md"
                     target="_blank"
                     rel="noopener"
@@ -165,7 +165,7 @@ export function SiteFooterCad() {
                   <li className="flex gap-2 px-4" key={name}>
                     {/* Hidden: the list element already conveys the position. */}
                     <span
-                      className="font-mono text-muted-foreground/80"
+                      className="font-mono text-muted-foreground"
                       aria-hidden
                     >
                       {String(index + 1).padStart(2, "0")}

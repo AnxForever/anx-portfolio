@@ -4,6 +4,7 @@ import Link from "next/link"
 import { MAIN_NAV } from "@/config/site"
 import { Separator } from "@/components/ui/separator"
 import { AnxMark } from "@/components/anx-mark"
+import { CommandMenuLazy } from "@/components/command-menu-lazy"
 import { NavDesktop } from "@/components/nav-desktop"
 import { NavItemGitHub } from "@/components/nav-item-github"
 import { ThemeToggle } from "@/components/theme-toggle"
@@ -17,8 +18,6 @@ import { getPortfolioSections } from "@/features/portfolio/data/sections"
 const BrandContextMenu = dynamic(
   () => import("@/components/brand-context-menu")
 )
-
-const CommandMenu = dynamic(() => import("@/components/command-menu"))
 
 export function SiteHeader() {
   const docs = getAllDocs()
@@ -55,7 +54,7 @@ export function SiteHeader() {
             orientation="vertical"
             className="mr-2 max-sm:hidden data-vertical:h-5 data-vertical:self-center"
           />
-          <CommandMenu
+          <CommandMenuLazy
             docs={docPreviews}
             bookmarks={bookmarkPreviews}
             portfolioSections={getPortfolioSections()}

@@ -17,34 +17,14 @@ const fontSerif = IBM_Plex_Serif({
 // Keep Caveat local to avoid the cloud build's Google-font resolution failure.
 // Source: googlefonts/caveat@59745e818ef7973e11e70cb1358d0e902b56c5fc; see Caveat-OFL.txt.
 const fontHandwritten = localFont({
-  src: "../assets/fonts/Caveat-Variable.ttf",
+  src: "../assets/fonts/Caveat-Variable.woff2",
   weight: "400 700",
   style: "normal",
   display: "swap",
+  // Same glyphs and weight axis as the original TTF, but 64 KB instead of
+  // 403 KB. Keep the preload so the handwritten greeting never flashes.
   variable: "--font-handwritten",
 })
-
-// const fontPixel = localFont({
-//   src: "../assets/fonts/DepartureMono-Regular.woff2",
-//   weight: "400",
-//   fallback: ["monospace"],
-//   variable: "--font-pixel",
-// })
-
-// const pixelatedMSSansSerif = localFont({
-//   src: [
-//     {
-//       path: "../assets/fonts/ms_sans_serif.woff2",
-//       weight: "400",
-//     },
-//     {
-//       path: "../assets/fonts/ms_sans_serif_bold.woff2",
-//       weight: "700",
-//     },
-//   ],
-//   fallback: ["Arial"],
-//   variable: "--font-98cn",
-// })
 
 export const fontVariables = cn(
   fontSans.variable,

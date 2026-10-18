@@ -13,7 +13,7 @@ import {
   IntroItemLink,
 } from "./intro-item"
 import { JobItem } from "./job-item"
-import { PhoneItem } from "./phone-item"
+import { PhoneItemLazy } from "./phone-item-lazy"
 
 export function Overview() {
   return (
@@ -70,7 +70,7 @@ export function Overview() {
         {USER.emailB64 && <EmailItem emailB64={USER.emailB64} />}
 
         {USER.phoneNumberB64 && (
-          <PhoneItem phoneNumberB64={USER.phoneNumberB64} />
+          <PhoneItemLazy phoneNumberB64={USER.phoneNumberB64} />
         )}
 
         {/* <IntroItem>

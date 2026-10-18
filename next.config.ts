@@ -10,6 +10,7 @@ const nextConfig: NextConfig = {
     BUILD_TIMESTAMP: new Date().toISOString(),
   },
   reactStrictMode: true,
+  poweredByHeader: false,
   typedRoutes: true,
   transpilePackages: ["next-mdx-remote"],
   allowedDevOrigins: ["anx.localhost", "anx.local"],
@@ -37,6 +38,36 @@ const nextConfig: NextConfig = {
           },
         }
       : undefined,
+  async headers() {
+    return [
+      {
+        source: "/(.*)",
+        headers: [
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          {
+            key: "Referrer-Policy",
+            value: "strict-origin-when-cross-origin",
+          },
+          { key: "X-Frame-Options", value: "DENY" },
+          {
+            key: "Permissions-Policy",
+            value: "camera=(), microphone=(), geolocation=()",
+          },
+        ],
+      },
+      {
+        // Public assets are not content-hashed. Cache them in the browser for
+        // a day, then revalidate in the background instead of on every visit.
+        source: "/images/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=86400, stale-while-revalidate=604800",
+          },
+        ],
+      },
+    ]
+  },
   async redirects() {
     return [
       {
