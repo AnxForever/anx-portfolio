@@ -13,7 +13,7 @@ export const PROJECTS: Project[] = [
     titleEffect: "shimmer",
     description: `StyleKit 整理网页风格，以及配套的设计参数、组件示例、动画和页面模板。可以在网站上浏览，也可以用 MCP、CLI 或 Skill，把公开资料带进开发流程。MCP 能查找风格、生成实现 brief、按许可读取资产，并对代码做静态风格检查。
 
-[工具怎么用和更新](https://me.anxforever.cn/blog/stylekit-mcp-tools) · [打开网站](https://stylekit.top) · [查看源码](https://github.com/AnxForever/stylekit)`,
+[工具怎么用和更新](https://anxforever.cn/blog/stylekit-mcp-tools) · [打开网站](https://stylekit.top) · [查看源码](https://github.com/AnxForever/stylekit)`,
   },
   {
     id: "research-first",

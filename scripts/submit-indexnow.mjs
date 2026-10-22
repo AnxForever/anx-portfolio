@@ -11,7 +11,7 @@
  */
 const KEY = "aaad89134bce95f55549f9d11cb7dc3e"
 
-const origin = (process.argv[2] ?? "https://me.anxforever.cn").replace(/\/$/, "")
+const origin = (process.argv[2] ?? "https://anxforever.cn").replace(/\/$/, "")
 const host = new URL(origin).host
 
 const sitemapRes = await fetch(`${origin}/sitemap.xml`)
