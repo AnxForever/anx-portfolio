@@ -1,6 +1,7 @@
 import { TEMPLATES } from "@/templates/registry"
 import { format } from "date-fns"
 
+import { TEMPLATES_ENABLED } from "@/config/features"
 import { SITE_INFO } from "@/config/site"
 import { markdownResponse } from "@/lib/markdown-response"
 import { getBlogPosts } from "@/features/doc/data/documents"
@@ -34,6 +35,23 @@ const keyFacts = [
   ),
 ].filter(Boolean)
 
+const templatesSection = TEMPLATES_ENABLED
+  ? `## Templates
+
+Seven portfolio templates share one layout system, each adapted to a major.
+The library index is ${SITE_INFO.url}/templates; individual templates are HTML
+pages:
+
+${TEMPLATES.filter((template) => template.href !== "/")
+  .map(
+    (template) =>
+      `- [${template.label}](${SITE_INFO.url}${template.href}): ${template.description}`
+  )
+  .join("\n")}
+
+`
+  : ""
+
 const content = `# ${SITE_INFO.name}
 
 > ${SITE_INFO.description}
@@ -65,19 +83,7 @@ retrieval.
 - [Blog](${SITE_INFO.url}/blog.md): Every blog post, newest first, with publish dates.
 - [Bookmarks](${SITE_INFO.url}/bookmarks.md): Recommended articles, courses, books, references, and tools.
 
-## Templates
-
-Seven portfolio templates share one layout system, each adapted to a major.
-The library index is ${SITE_INFO.url}/templates; individual templates are HTML
-pages, listed newest work first:
-
-${TEMPLATES.filter((template) => template.href !== "/")
-  .map(
-    (template) =>
-      `- [${template.label}](${SITE_INFO.url}${template.href}): ${template.description}`
-  )
-  .join("\n")}
-
+${templatesSection}
 ## Blog
 
 ${allPosts.map((item) => `- [${item.metadata.title}](${SITE_INFO.url}/blog/${item.slug}.md): ${item.metadata.description} (published ${format(new Date(item.metadata.createdAt), "yyyy-MM-dd")}, updated ${format(new Date(item.metadata.updatedAt), "yyyy-MM-dd")})`).join("\n")}

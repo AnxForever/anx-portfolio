@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next"
 import { TEMPLATES } from "@/templates/registry"
 
+import { TEMPLATES_ENABLED } from "@/config/features"
 import { SITE_INFO } from "@/config/site"
 import { getBlogPosts } from "@/features/doc/data/documents"
 
@@ -21,7 +22,6 @@ const PAGES: {
   { href: "/blog", changeFrequency: "weekly", priority: 0.9 },
   { href: "/now", changeFrequency: "weekly", priority: 0.7 },
   { href: "/bookmarks", changeFrequency: "weekly", priority: 0.6 },
-  { href: "/templates", changeFrequency: "monthly", priority: 0.8 },
   { href: "/craft", changeFrequency: "monthly", priority: 0.6 },
   { href: "/insights", changeFrequency: "weekly", priority: 0.6 },
   { href: "/timeline", changeFrequency: "monthly", priority: 0.5 },
@@ -37,15 +37,26 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority,
   }))
 
-  // The default template is the home page, already listed above.
-  const templates = TEMPLATES.filter((template) => template.href !== "/").map(
-    (template) => ({
-      url: `${SITE_INFO.url}${template.href}`,
-      lastModified: BUILD_DATE,
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
-    })
-  )
+  // Template previews are repo-only unless the flag is on, so they stay out of
+  // the sitemap in production. The default template is the home page.
+  const templates: MetadataRoute.Sitemap = TEMPLATES_ENABLED
+    ? [
+        {
+          url: `${SITE_INFO.url}/templates`,
+          lastModified: BUILD_DATE,
+          changeFrequency: "monthly",
+          priority: 0.8,
+        },
+        ...TEMPLATES.filter((template) => template.href !== "/").map(
+          (template) => ({
+            url: `${SITE_INFO.url}${template.href}`,
+            lastModified: BUILD_DATE,
+            changeFrequency: "monthly" as const,
+            priority: 0.7,
+          })
+        ),
+      ]
+    : []
 
   const posts = getBlogPosts().map((post) => ({
     url: `${SITE_INFO.url}/blog/${post.slug}`,
