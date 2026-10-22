@@ -21,6 +21,8 @@ function getWebSiteJsonLd(): WithContext<WebSite> {
     "@id": JSON_LD_ID.website,
     name: SITE_INFO.name,
     url: SITE_INFO.url,
+    description: SITE_INFO.description,
+    inLanguage: "zh-CN",
     author: personJsonLd,
   }
 }
@@ -50,6 +52,22 @@ export const metadata: Metadata = {
   },
   description: SITE_INFO.description,
   keywords: SITE_INFO.keywords,
+  applicationName: SITE_INFO.name,
+  referrer: "strict-origin-when-cross-origin",
+  formatDetection: { email: false, address: false, telephone: false },
+  // No page opts out of indexing; declaring the snippet limits keeps Google
+  // from truncating the long-form titles this site uses.
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   authors: [
     {
       name: USER.displayName,
@@ -150,6 +168,12 @@ export default function RootLayout({
           }}
         />
         <JsonLdScript data={getWebSiteJsonLd()} />
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title={`${SITE_INFO.name} – Blog`}
+          href="/blog/rss"
+        />
       </head>
 
       {process.env.NEXT_PUBLIC_GTM_ID && (

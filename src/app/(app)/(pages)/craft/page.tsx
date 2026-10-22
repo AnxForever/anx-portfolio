@@ -20,6 +20,7 @@ export const metadata: Metadata = {
   description,
   alternates: {
     canonical: "/craft",
+    types: { "text/markdown": "/craft.md" },
   },
   openGraph: {
     url: "/craft",

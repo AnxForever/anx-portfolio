@@ -56,6 +56,15 @@ const nextConfig: NextConfig = {
         ],
       },
       {
+        // `/` and post pages serve HTML or Markdown depending on `Accept`.
+        source: "/",
+        headers: [{ key: "Vary", value: "Accept" }],
+      },
+      {
+        source: "/blog/:slug",
+        headers: [{ key: "Vary", value: "Accept" }],
+      },
+      {
         // Public assets are not content-hashed. Cache them in the browser for
         // a day, then revalidate in the background instead of on every visit.
         source: "/images/:path*",

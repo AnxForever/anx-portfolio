@@ -70,6 +70,7 @@ export async function generateMetadata({
     description,
     alternates: {
       canonical: postUrl,
+      types: { "text/markdown": `${postUrl}.md` },
     },
     openGraph: {
       url: postUrl,

@@ -34,6 +34,7 @@ export const metadata: Metadata = {
   description,
   alternates: {
     canonical: "/bookmarks",
+    types: { "text/markdown": "/bookmarks.md" },
   },
   openGraph: {
     url: "/bookmarks",

@@ -1,22 +1,58 @@
 import type { MetadataRoute } from "next"
+import { TEMPLATES } from "@/templates/registry"
 
-import { MOBILE_NAV } from "@/config/navigation"
 import { SITE_INFO } from "@/config/site"
 import { getBlogPosts } from "@/features/doc/data/documents"
 
 export const revalidate = false
 export const dynamic = "force-static"
 
+// Stamped once per build, matching the value inlined by next.config.ts.
+const BUILD_DATE = new Date(
+  process.env.BUILD_TIMESTAMP ?? Date.now()
+).toISOString()
+
+const PAGES: {
+  href: string
+  changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"]
+  priority: number
+}[] = [
+  { href: "/", changeFrequency: "daily", priority: 1 },
+  { href: "/blog", changeFrequency: "weekly", priority: 0.9 },
+  { href: "/now", changeFrequency: "weekly", priority: 0.7 },
+  { href: "/bookmarks", changeFrequency: "weekly", priority: 0.6 },
+  { href: "/templates", changeFrequency: "monthly", priority: 0.8 },
+  { href: "/craft", changeFrequency: "monthly", priority: 0.6 },
+  { href: "/insights", changeFrequency: "weekly", priority: 0.6 },
+  { href: "/timeline", changeFrequency: "monthly", priority: 0.5 },
+  { href: "/testimonials", changeFrequency: "monthly", priority: 0.5 },
+  { href: "/sponsors", changeFrequency: "monthly", priority: 0.4 },
+]
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const pages = PAGES.map(({ href, changeFrequency, priority }) => ({
+    url: `${SITE_INFO.url}${href === "/" ? "" : href}`,
+    lastModified: BUILD_DATE,
+    changeFrequency,
+    priority,
+  }))
+
+  // The default template is the home page, already listed above.
+  const templates = TEMPLATES.filter((template) => template.href !== "/").map(
+    (template) => ({
+      url: `${SITE_INFO.url}${template.href}`,
+      lastModified: BUILD_DATE,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })
+  )
+
   const posts = getBlogPosts().map((post) => ({
     url: `${SITE_INFO.url}/blog/${post.slug}`,
     lastModified: new Date(post.metadata.updatedAt).toISOString(),
+    changeFrequency: "yearly" as const,
+    priority: 0.6,
   }))
 
-  const routes = MOBILE_NAV.map(({ href }) => ({
-    url: `${SITE_INFO.url}${href === "/" ? "" : href}`,
-    lastModified: new Date().toISOString(),
-  }))
-
-  return [...routes, ...posts]
+  return [...pages, ...templates, ...posts]
 }
