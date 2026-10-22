@@ -49,9 +49,9 @@ import type { PortfolioSection } from "@/features/portfolio/types/sections"
 
 import { AnxMark, getMarkSVG } from "./anx-mark"
 import { getWordmarkSVG } from "./anx-wordmark"
-import { NewsIcon, SearchIcon } from "./icons"
-import { Button } from "./ui/button"
-import { Kbd, KbdGroup } from "./ui/kbd"
+import { CommandMenuTrigger } from "./command-menu-trigger"
+import { NewsIcon } from "./icons"
+import { Kbd } from "./ui/kbd"
 
 type CommandKind = "command" | "page" | "link" | "bookmark"
 
@@ -119,22 +119,26 @@ const OTHER_LINK_ITEMS: CommandLinkItem[] = [
   },
 ]
 
+export type CommandMenuProps = {
+  docs: DocPreview[]
+  bookmarks: BookmarkPreview[]
+  portfolioSections: PortfolioSection[]
+  enabledHotkeys?: boolean
+  defaultOpen?: boolean
+}
+
 export function CommandMenu({
   docs,
   bookmarks,
   portfolioSections,
   enabledHotkeys = false,
-}: {
-  docs: DocPreview[]
-  bookmarks: BookmarkPreview[]
-  portfolioSections: PortfolioSection[]
-  enabledHotkeys?: boolean
-}) {
+  defaultOpen = false,
+}: CommandMenuProps) {
   const router = useRouter()
 
   const { setTheme } = useTheme()
 
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(defaultOpen)
 
   const [selectedCommandKind, setSelectedCommandKind] =
     useState<CommandKind | null>(null)
@@ -402,36 +406,6 @@ export function CommandMenu({
 }
 
 export default CommandMenu
-
-function CommandMenuTrigger({ ...props }: React.ComponentProps<typeof Button>) {
-  return (
-    <Button
-      data-slot="command-menu-trigger"
-      className="gap-1.5 border-none px-1.5 text-muted-foreground will-change-[scale] select-none"
-      variant="ghost"
-      size="sm"
-      {...props}
-    >
-      <SearchIcon />
-
-      <span className="font-sans text-sm/4 font-medium sm:sr-only">
-        Search…
-      </span>
-
-      {/* Tablets rarely have a keyboard, and the header has no room for the
-      hint until md. */}
-      <KbdGroup className="hidden gap-0.75 md:in-[.os-macos_&]:flex">
-        <Kbd className="w-5 min-w-auto">⌘</Kbd>
-        <Kbd className="w-5 min-w-auto">K</Kbd>
-      </KbdGroup>
-
-      <KbdGroup className="hidden gap-0.75 md:not-[.os-macos_&]:flex">
-        <Kbd>Ctrl</Kbd>
-        <Kbd className="w-5 min-w-auto">K</Kbd>
-      </KbdGroup>
-    </Button>
-  )
-}
 
 function CommandMenuInput() {
   const [searchValue, setSearchValue] = useState("")

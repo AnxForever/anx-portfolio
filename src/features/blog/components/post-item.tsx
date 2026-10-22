@@ -11,10 +11,12 @@ export function PostItem({
   post,
   headingAs,
   imageLoading = "lazy",
+  prefetch = true,
 }: {
   post: Doc
   headingAs?: HeadingTypes
   imageLoading?: ImageProps["loading"]
+  prefetch?: boolean
 }) {
   const Heading = headingAs ?? "h2"
 
@@ -38,7 +40,7 @@ export function PostItem({
 
       <div className="flex flex-col gap-1 p-2">
         <Heading className="text-lg/snug font-medium text-balance">
-          <Link href={`/blog/${post.slug}`}>
+          <Link href={`/blog/${post.slug}`} prefetch={prefetch}>
             <span className="absolute inset-0" aria-hidden />
             {post.metadata.title}
           </Link>

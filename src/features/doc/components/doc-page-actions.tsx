@@ -82,6 +82,7 @@ export function LLMCopyButton({ markdownUrl }: { markdownUrl: string }) {
       className="h-7 gap-1.5 border-none px-2 text-[0.8125rem] active:scale-none"
       variant="secondary"
       size="sm"
+      aria-label="Copy page"
       aria-busy={isCopying}
       disabled={isCopying}
       onClick={handleCopy}
@@ -189,12 +190,12 @@ export function ViewOptions({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
+        aria-label="View Options"
         render={
           <Button
             className="size-7 border-none active:scale-none"
             variant="secondary"
             size="icon-sm"
-            aria-label="View Options"
           />
         }
       >

@@ -3,6 +3,7 @@ import dynamic from "next/dynamic"
 import { MOBILE_NAV } from "@/config/site"
 import { cn } from "@/lib/utils"
 import { Separator } from "@/components/ui/separator"
+import { CommandMenuLazy } from "@/components/command-menu-lazy"
 import { BOOKMARKS } from "@/features/bookmark/data"
 import { sortBookmarksNewestFirst } from "@/features/bookmark/lib/sort"
 import type { BookmarkPreview } from "@/features/bookmark/types"
@@ -10,7 +11,6 @@ import { getAllDocs } from "@/features/doc/data/documents"
 import type { DocPreview } from "@/features/doc/types/document"
 import { getPortfolioSections } from "@/features/portfolio/data/sections"
 
-const CommandMenu = dynamic(() => import("@/components/command-menu"))
 const NavMobile = dynamic(() => import("@/components/nav-mobile"))
 
 export function SiteBottomNav() {
@@ -37,7 +37,7 @@ export function SiteBottomNav() {
         "*:data-[slot=command-menu-trigger]:min-w-20 *:data-[slot=command-menu-trigger]:gap-2 *:data-[slot=command-menu-trigger]:rounded-none *:data-[slot=command-menu-trigger]:border-none *:data-[slot=command-menu-trigger]:bg-transparent *:data-[slot=command-menu-trigger]:px-0 *:data-[slot=command-menu-trigger]:hover:bg-transparent *:data-[slot=command-menu-trigger]:active:scale-none"
       )}
     >
-      <CommandMenu
+      <CommandMenuLazy
         docs={docPreviews}
         bookmarks={bookmarkPreviews}
         portfolioSections={getPortfolioSections()}
