@@ -34,6 +34,7 @@
     "upgrade:next": "npx @next/codemod@latest upgrade latest",
     "upgrade:tailwind": "npx @tailwindcss/upgrade@latest",
     "indexnow": "node scripts/submit-indexnow.mjs",
+    "ship": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/deploy.ps1",
     "prepare": "husky"
   },
   "dependencies": {
