@@ -46,3 +46,6 @@ next-env.d.ts
 
 # Local session artifacts (screenshots, logs)
 .artifacts/
+
+# local build artifacts for the self-hosted box
+.deploy/

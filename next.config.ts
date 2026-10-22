@@ -13,6 +13,9 @@ const nextConfig: NextConfig = {
   },
   reactStrictMode: true,
   poweredByHeader: false,
+  // Self-hosted on the Aliyun box: `next build` emits .next/standalone with a
+  // minimal node_modules tree, which is what the systemd unit runs.
+  output: "standalone",
   typedRoutes: true,
   transpilePackages: ["next-mdx-remote"],
   allowedDevOrigins: ["anx.localhost", "anx.local"],
